@@ -93,7 +93,7 @@ body{
 	position: relative;
 	margin: 14px 0;
 }
-.main-panel .left-section .user-details .edit-btn a{
+.main-panel .left-section .user-details .edit-btn button{
 	height: 38px;
 	line-height: 38px;
 	background: #fff;
@@ -138,11 +138,11 @@ body{
 	display: inline-block;
 	list-style: none;
 }
-.main-panel .body-panel .top-header .left-action ul li a{
+.main-panel .body-panel .top-header .left-action ul li button{
 	color: #505050;
 	font-size: 13px;
 }
-.main-panel .body-panel .top-header .left-action ul li a.menu-btn{
+.main-panel .body-panel .top-header .left-action ul li button.menu-btn{
 	height: 30px;
 	width: 30px;
 	background: #004c8f;
@@ -194,12 +194,28 @@ body{
 	font-size:13px;
 	padding-right: 90px;
 }
-.body-panel .inner-panel .search-bar a{
+.body-panel .inner-panel .search-bar button{
 	background: linear-gradient(#004e92 , #1a76c7);
 	color: #fff;
 	position: absolute;
 	height: 40px;
 	line-height: 40px;
+	padding: 0 15px;
+	right: 0;
+}
+.body-panel .inner-panel .search-bar button{
+	background: linear-gradient(#004e92 , #1a76c7);
+	color: #fff;
+	position: absolute;
+	height: 40px;
+	line-height: 40px;
+	padding: 0 15px;
+	right: 0;
+}
+.right-action button{
+	background: linear-gradient(#004e92 , #1a76c7);
+	color: #fff;
+	height: 40px;
 	padding: 0 15px;
 	right: 0;
 }

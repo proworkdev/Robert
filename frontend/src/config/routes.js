@@ -1,15 +1,14 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import LoginScreen from "../components/Login";
-import Dashboard from "../components/Dashboard";
-import _ from "underscore";
+import LoginScreen from "../containers/Login";
+import Dashboard from "../containers/Dashboard";
 
 const Routers = store => {
   const state = store.getState();
 
   /*********** Check authentications ***********/
 
-  return state.user.isLoggedIn == false ? (
+  return !state.user.isLoggedIn ? (
     <div>
       <Switch>
         <Route

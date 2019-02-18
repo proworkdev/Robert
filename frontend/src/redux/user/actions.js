@@ -5,22 +5,24 @@
 
 import { LOGIN, UPDATE_PROFILE, USER_DATA } from "./constants";
 import axios from "axios";
-import localIP from "../../config/APIurl";
-export const login = data => ({ type: LOGIN, data: data }); // login action.
-export const updateProfile = data => ({ type: UPDATE_PROFILE }); // logout action to update user profile.
+import API_URL from "../../config/APIurl";
+
+// actions
+export const login = data => ({ type: LOGIN, data: data });
+export const updateProfile = () => ({ type: UPDATE_PROFILE });
 export const getUserDetails = data => ({ type: USER_DATA, data: data });
+
+const headers = {
+  "Content-Type": "application/json"
+};
 
 /********* API to login data ************/
 export const loginComplete = data => {
-  const headers = {
-    "Content-Type": "application/json"
-  };
-  let url = localIP.concat("/signin");
+  let url = API_URL.concat("/signin");
   return dispatch => {
     return axios
       .post(url, data, headers)
       .then(data => {
-        console.log(data, "hello");
         dispatch(login(data));
       })
       .catch(function(error) {
@@ -39,15 +41,10 @@ export const logout = () => {
 
 /********* API to getuserData ************/
 export const getuserData = data => {
-  let url = localIP.concat("/");
-  let token = data.toString();
-  var config = {
-    headers: { Authorization: token }
-  };
-
+  let url = API_URL.concat("/");
   return dispatch => {
     return axios
-      .get(url.concat("allUsers"), config)
+      .get(url.concat("allUsers"), getAuthHeader(data))
       .then(data => {
         dispatch(getUserDetails(data));
       })
@@ -58,21 +55,13 @@ export const getuserData = data => {
 /********* Image Upload ************/
 
 export const imageUpload = (token, image, callBack) => {
-  let url = localIP.concat("/upload");
-  const config = {
-    headers: {
-      Authorization: token.toString(),
-      "content-type": "multipart/form-data"
-    }
-  };
+  let url = API_URL.concat("/upload");
   let data = new FormData();
   data.append("file", image);
   return dispatch => {
     axios
-      .post(url, data, config)
+      .post(url, data, getAuthHeader(data))
       .then(result => {
-        console.log(result.data, "result.dataaaaaaaaaaaaaa");
-
         callBack(result);
       })
       .catch(error => {
@@ -80,3 +69,11 @@ export const imageUpload = (token, image, callBack) => {
       });
   };
 };
+
+// return auth headers
+const getAuthHeader = (data) => {
+  let token = data.toString();
+  return {
+    headers: { Authorization: token }
+  };
+}

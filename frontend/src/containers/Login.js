@@ -22,37 +22,32 @@ class LoginScreen extends Component {
       this.setState({ alertErrorShow: true });
     }
   }
-  login(event) {
-    let context = this;
+
+  login = (event) => {
     event.preventDefault();
     let { name, password } = event.target;
-    if (name.value.trim().length == 0) {
-      context.setState({ phoneError: "* Name cant be empty" });
+    if (!name.value.trim().length) {
+      this.setState({ phoneError: "* Name cant be empty" });
       return;
     }
 
-    if (password.value.trim().length == 0) {
-      context.setState({ passwordError: "* Password cannot be empty" });
+    if (!password.value.trim().length) {
+      this.setState({ passwordError: "* Password cannot be empty" });
       return;
     } else {
       let data = {
         email: name.value,
         password: password.value
       };
-      console.log("this", this.props);
       this.props.loginComplete(data);
-      // this.props.history.push('./dashboard')
     }
   }
   render() {
-    let context = this;
-    console.log("render");
     return (
       <div className="login-page">
         <div className="login-form">
           <div className="login-title">Login</div>
-
-          <form onSubmit={event => context.login(event)} ref="loginForm">
+          <form onSubmit={this.login} >
             <div className="form">
               <div className="input-group">
                 <div className="input-form">
